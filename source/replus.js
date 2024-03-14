@@ -37,7 +37,7 @@ chrome.extension.onMessage.addListener(function (req, sender, sendResponse) {
 							var btn=document.querySelector("#main > div > div.layout.layout-content.touch-no.justify-center.align-start > div.flex.app-center.shrink > div > div > div.flex.inset-box > div > div > div:nth-child(1) > div > button");
 							if(String(btn.style).indexOf("backgroung-color:#971311")){
 								j=j+1;
-								if(j==20){
+								if(j==30){
 									btn.click();
 									clearInterval(id);
 								}
