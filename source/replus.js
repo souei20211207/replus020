@@ -17,17 +17,38 @@ chrome.extension.onMessage.addListener(function (req, sender, sendResponse) {
 			if(request[1]!="0"){
 				var pName=request[1];
 				var pPass=request[2];
-				setTimeout(function() {
-					var inp=document.getElementsByTagName("input");
-					inp[0].value=pName;
-					inp[0].dispatchEvent(new Event("input", {bubbles: true,cancelable:true,}));
-					inp[1].value=pPass;
-					inp[1].dispatchEvent(new Event("input", {bubbles: true,cancelable:true,}));
-					setTimeout(function() {
-						var btn=document.querySelector("#main > div > div.layout.layout-content.touch-no.justify-center.align-start > div.flex.app-center.shrink > div > div > div.flex.inset-box > div > div > div:nth-child(1) > div > button");
-						btn.click();
-					},500);
-				},500);
+				var i=0;
+				var j=0;
+				var c="no";
+				var id = setInterval(function () {
+					i=i+1;
+					if(c=="no"){
+						try{
+							var inp=document.getElementsByTagName("input");
+							inp[0].value=pName;
+							inp[0].dispatchEvent(new Event("input", {bubbles: true,cancelable:true,}));
+							inp[1].value=pPass;
+							inp[1].dispatchEvent(new Event("input", {bubbles: true,cancelable:true,}));
+							c="yes";
+						}catch(error){
+						}
+					}else if(c=="yes"){
+						try{
+							var btn=document.querySelector("#main > div > div.layout.layout-content.touch-no.justify-center.align-start > div.flex.app-center.shrink > div > div > div.flex.inset-box > div > div > div:nth-child(1) > div > button");
+							if(String(btn.style).indexOf("backgroung-color:#971311")){
+								j=j+1;
+								if(j==20){
+									btn.click();
+									clearInterval(id);
+								}
+							}
+						}catch(error){
+						}
+					}
+					if(i>1000){
+						clearInterval(id);
+					}
+				},10);
 			}
 		}
 	}else{
