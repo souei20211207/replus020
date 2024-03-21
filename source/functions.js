@@ -1,4 +1,4 @@
-//20240312 ver.0.03
+//20240320 ver.0.03
 //ボタンのイベントリスナー--------------------------------
 document.getElementById("change").addEventListener('click', (e) => {
 	acc_change();
@@ -20,8 +20,6 @@ document.getElementById("recieve").addEventListener('click', (e) => {
 document.getElementById("top").addEventListener('click', (e) => {
 	openURL("https://www.redstoneonline.jp/");
 });
-
-
 
 //ボタンのイベント---------------------------------------
 function openURL(url){
