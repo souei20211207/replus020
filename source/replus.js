@@ -1,4 +1,4 @@
-//20240312 ver.0.03
+//20240320 ver.0.03
 document.addEventListener('DOMContentLoaded', function() {
 	chrome.runtime.sendMessage("count");
 });
@@ -37,7 +37,7 @@ chrome.extension.onMessage.addListener(function (req, sender, sendResponse) {
 							var btn=document.querySelector("#main > div > div.layout.layout-content.touch-no.justify-center.align-start > div.flex.app-center.shrink > div > div > div.flex.inset-box > div > div > div:nth-child(1) > div > button");
 							if(String(btn.style).indexOf("backgroung-color:#971311")){
 								j=j+1;
-								if(j==30){
+								if(j==50){
 									btn.click();
 									clearInterval(id);
 								}
@@ -54,19 +54,16 @@ chrome.extension.onMessage.addListener(function (req, sender, sendResponse) {
 	}else{
 		request = req;
 		if (request == "name") {
+			var pName;
 			try {
-				var elements = document.querySelector("#main > div > div.layout.layout-content.touch-no.justify-center.align-start > div.layout.app-left.column.justify-start.align-end.wrap > div.layout.frame.shrink.column.justify-space-between.align-content-space-between > div > div:nth-child(2) > div.layout.login.column.justify-start.align-content-center > div.layout.id.justify-space-between.align-content-center > div.flex.py-1.touch-on");
-				var pName = elements.innerHTML;
+				var elements = document.getElementsByClassName("flex py-1 touch-on");
+				pName = elements[0].innerHTML;
 			} catch (error) {
-				var pName = "souei";
+				pName = "souei";
 			}
-			sendResponse(pName)
+			sendResponse(pName);
 		}else{
 			window.location.href = request;
 		}
     }
 });
-
-
-
-
