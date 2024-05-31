@@ -1,4 +1,4 @@
-//20240320 ver.0.03
+//20240601 ver.0.04
 //ボタンのイベントリスナー--------------------------------
 document.getElementById("change").addEventListener('click', (e) => {
 	acc_change();
@@ -12,10 +12,10 @@ document.getElementById("new").addEventListener('click', (e) => {
 });
 
 document.getElementById("avabox").addEventListener('click', (e) => {
-	openURL("https://www.redstoneonline.jp/shop/item?m=101&s=0");
+	openURL("https://www.redstoneonline.jp/event/redslogin");
 });
 document.getElementById("recieve").addEventListener('click', (e) => {
-	openURL("https://www.redstoneonline.jp/qna/main");
+	openRoulette();
 });
 document.getElementById("top").addEventListener('click', (e) => {
 	openURL("https://www.redstoneonline.jp/");
@@ -136,6 +136,13 @@ function w_load(){
 			});
 		});
 	});
+}
+
+function openRoulette(){
+    chrome.tabs.query({active : true}, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, "roulette");
+        window.close();
+    });
 }
 
 //ページ表示時に値を読み込む

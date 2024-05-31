@@ -1,4 +1,4 @@
-//20240320 ver.0.03
+//20240601 ver.0.04
 document.addEventListener('DOMContentLoaded', function() {
 	chrome.runtime.sendMessage("count");
 });
@@ -62,6 +62,12 @@ chrome.extension.onMessage.addListener(function (req, sender, sendResponse) {
 				pName = "souei";
 			}
 			sendResponse(pName);
+        }else if(request == "roulette"){
+            try {
+                var element = document.getElementsByClassName("flex touch-on mt-2")[0];
+                element.click();
+            } catch (error) {
+			}
 		}else{
 			window.location.href = request;
 		}
