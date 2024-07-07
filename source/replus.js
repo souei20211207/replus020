@@ -1,4 +1,4 @@
-//20240601 ver.0.04
+//20240707 ver.0.05
 document.addEventListener('DOMContentLoaded', function() {
 	chrome.runtime.sendMessage("count");
 });
@@ -12,7 +12,7 @@ chrome.extension.onMessage.addListener(function (req, sender, sendResponse) {
 				localStorage.removeItem('ace_type');
 				localStorage.removeItem('ace_token');
 			}
-			window.location.href = "https://www.redstoneonline.jp/signin/1?returnurl=https%3A%2F%2Fwww.redstoneonline.jp%2F";
+			window.location.href = "https://www.redstoneonline.jp/signin/1?returnurl=https%3A%2F%2Fwww.redstoneonline.jp%2Frank";
 		}else if(request[0]=="input"){
 			if(request[1]!="0"){
 				var pName=request[1];
