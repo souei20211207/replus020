@@ -1,4 +1,4 @@
-//20240707 ver.0.05
+//20240712 ver.0.05
 document.addEventListener('DOMContentLoaded', function() {
 	chrome.runtime.sendMessage("count");
 });
@@ -64,8 +64,13 @@ chrome.extension.onMessage.addListener(function (req, sender, sendResponse) {
 			sendResponse(pName);
         }else if(request == "roulette"){
             try {
-                var element = document.getElementsByClassName("flex touch-on mt-2")[0];
-                element.click();
+                var elements = document.getElementsByTagName('img');
+                var i;
+                for(i=0;i<elements.length;i++){
+                    if(elements[i].getAttribute('src')=='https://file.redstoneonline.jp/RS.JP.live/banner/202402/e6a1317b/ad75/4caa/92a2/b65031333d89e6a1317b-ad75-4caa-92a2-b65031333d89.png'){
+                        elements[i].click();
+                    }
+                }
             } catch (error) {
 			}
 		}else{
