@@ -1,4 +1,4 @@
-//20240712 ver.0.05
+//20250119 ver.0.06
 document.addEventListener('DOMContentLoaded', function() {
 	chrome.runtime.sendMessage("count");
 });
@@ -72,6 +72,21 @@ chrome.extension.onMessage.addListener(function (req, sender, sendResponse) {
                     }
                 }
             } catch (error) {
+			}
+        }else if(request == "roulette2"){
+            var message;
+            massage="no";
+            try {
+                var elements = document.getElementsByTagName('img');
+                var i;
+                for(i=0;i<elements.length;i++){
+                    if(elements[i].getAttribute('src')=='https://file.redstoneonline.jp/RS.JP.live/banner/202501/2136cdd6/d51d/4343/93d4/6bc9d181b48e2136cdd6-d51d-4343-93d4-6bc9d181b48e.png'){
+                        message="yes";
+                    }
+                }
+                sendResponse(message);
+            } catch (error) {
+                sendResponse(message);
 			}
 		}else{
 			window.location.href = request;
