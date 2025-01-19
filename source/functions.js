@@ -1,4 +1,4 @@
-//20240601 ver.0.04
+//20250119 ver.0.06
 //ボタンのイベントリスナー--------------------------------
 document.getElementById("change").addEventListener('click', (e) => {
 	acc_change();
@@ -19,6 +19,9 @@ document.getElementById("recieve").addEventListener('click', (e) => {
 });
 document.getElementById("top").addEventListener('click', (e) => {
 	openURL("https://www.redstoneonline.jp/");
+});
+document.getElementById("roulette").addEventListener('click', (e) => {
+	openURL("https://www.redstoneonline.jp/event/roulette");
 });
 
 //ボタンのイベント---------------------------------------
@@ -145,5 +148,16 @@ function openRoulette(){
     });
 }
 
+function openRoulette2(){
+    chrome.tabs.query({active : true}, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, "roulette2", function (response) {
+            if(response=="yes" || tabs[0].url=="https://www.redstoneonline.jp/event/roulette"){
+                document.getElementById("roulette").style.display = "block";
+            }
+        });
+    });
+}
+
 //ページ表示時に値を読み込む
 w_load();
+openRoulette2();
