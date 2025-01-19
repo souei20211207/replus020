@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "れぷらす",
 	"description": "RED STONEの複数アカウント管理が手軽にできるツール",
-	"version": "0.05",
+	"version": "0.06",
 	"icons": {
 		"32": "icon32.png",
 		"48": "icon48.png",
