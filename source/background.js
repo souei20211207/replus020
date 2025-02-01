@@ -1,4 +1,4 @@
-//20240312 ver.0.03
+//20250201 ver.0.06
 //初回起動時に変数を作る
 chrome.storage.sync.get(["firstopen"], function(items) {
 	if(items.firstopen == null){
@@ -7,7 +7,8 @@ chrome.storage.sync.get(["firstopen"], function(items) {
 			{
 				"firstopen": "1",
 				"IDs": "",
-				"count":"0"
+				"count":"0",
+                "pName":"souei"
 			}
 		);
 	}    
@@ -33,5 +34,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 			}
 		});
 		chrome.storage.sync.set({"count":"0"});
-	}
+	}else{
+        chrome.storage.sync.set({"pName":request});
+    }
 });
