@@ -1,4 +1,4 @@
-//20250119 ver.0.06
+//20250201 ver.0.06
 //ボタンのイベントリスナー--------------------------------
 document.getElementById("change").addEventListener('click', (e) => {
 	acc_change();
@@ -124,21 +124,19 @@ function w_load(){
 	
 	chrome.storage.sync.get(["IDs"], function(items) {
 		var accounts = items.IDs.split("\n");
-		chrome.tabs.query({active : true}, (tabs) => {
-			chrome.tabs.sendMessage(tabs[0].id, "name", function (response) {
-				accounts.forEach(element => {
-					var accdata = element.split("&souei&");
-					if(accdata[0] != ""){
-						var additional = ""
-						if(response == accdata[0]){
-							additional = ' style="color:blue"'; //アクティブなIDなら青色表示
-						}
-						document.getElementById('accounts').insertAdjacentHTML('beforeend', '<option value="' + accdata[0] + '&souei&' +accdata[1] + '"' + additional + '>' + accdata[0] + '</option>');
-					}
-				});
-			});
-		});
-	});
+        accounts.forEach(element => {
+            var accdata = element.split("&souei&");
+            if(accdata[0] != ""){
+                var additional = ""
+                chrome.storage.sync.get(["pName"],function(namae){
+                    if(namae.pName == accdata[0]){
+                        additional = ' style="color:blue"';
+                    }
+                    document.getElementById('accounts').insertAdjacentHTML('beforeend', '<option value="' + accdata[0] + '&souei&' +accdata[1] + '"' + additional + '>' + accdata[0] + '</option>');
+                });
+            }
+        });
+    });
 }
 
 function openRoulette(){
@@ -148,16 +146,5 @@ function openRoulette(){
     });
 }
 
-function openRoulette2(){
-    chrome.tabs.query({active : true}, (tabs) => {
-        chrome.tabs.sendMessage(tabs[0].id, "roulette2", function (response) {
-            if(response=="yes" || tabs[0].url=="https://www.redstoneonline.jp/event/roulette"){
-                document.getElementById("roulette").style.display = "block";
-            }
-        });
-    });
-}
-
 //ページ表示時に値を読み込む
 w_load();
-openRoulette2();
