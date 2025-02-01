@@ -1,6 +1,33 @@
-//20250119 ver.0.06
+//20250201 ver.0.06
 document.addEventListener('DOMContentLoaded', function() {
 	chrome.runtime.sendMessage("count");
+    if(window.location.href.match("https://www.redstoneonline.jp/*")){
+        if(localStorage.getItem('ace_type')) {
+            var pName;
+            var i=0;
+            var id = setInterval(function () {
+                i=i+1
+                try {
+                    var elements = document.getElementsByClassName("flex py-1 touch-on");
+                    pName = elements[0].innerHTML;
+                    chrome.runtime.sendMessage(pName);
+                } catch (error) {
+                    if(window.location.href==("https://www.redstoneonline.jp/event/redslogin")){
+                       i=i+1000;
+                    }else if(window.location.href==("https://www.redstoneonline.jp/event/roulette")){
+                        i=i+1000;
+                    }
+                }
+                if(i>1000){
+				    clearInterval(id);
+				}
+            },10);
+        }else{
+            var pName;
+            pName = "dsouei";
+            chrome.runtime.sendMessage(pName);
+        }
+    }
 });
 
 chrome.extension.onMessage.addListener(function (req, sender, sendResponse) {
@@ -53,16 +80,7 @@ chrome.extension.onMessage.addListener(function (req, sender, sendResponse) {
 		}
 	}else{
 		request = req;
-		if (request == "name") {
-			var pName;
-			try {
-				var elements = document.getElementsByClassName("flex py-1 touch-on");
-				pName = elements[0].innerHTML;
-			} catch (error) {
-				pName = "souei";
-			}
-			sendResponse(pName);
-        }else if(request == "roulette"){
+		if(request == "roulette"){
             try {
                 var elements = document.getElementsByTagName('img');
                 var i;
