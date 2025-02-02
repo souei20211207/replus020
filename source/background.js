@@ -1,4 +1,4 @@
-//20250201 ver.0.06
+//20250202 ver.0.06
 //初回起動時に変数を作る
 chrome.storage.sync.get(["firstopen"], function(items) {
 	if(items.firstopen == null){
