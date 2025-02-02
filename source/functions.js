@@ -1,4 +1,4 @@
-//20250201 ver.0.06
+//20250202 ver.0.06
 //ボタンのイベントリスナー--------------------------------
 document.getElementById("change").addEventListener('click', (e) => {
 	acc_change();
@@ -145,6 +145,12 @@ function openRoulette(){
         window.close();
     });
 }
+function idlook(){
+    chrome.tabs.query({active : true}, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, "idlook");
+    });
+}
 
 //ページ表示時に値を読み込む
+idlook();
 w_load();
