@@ -92,9 +92,31 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
             } catch (error) {
 			}
         }else if(request == "idlook"){
-            var elements = document.getElementsByClassName("flex py-1 touch-on");
-            var pName=elements[0].innerHTML;
-            chrome.runtime.sendMessage(pName);
+            if(window.location.href.match("https://www.redstoneonline.jp/*")){
+                if(localStorage.getItem('ace_type')) {
+                    if(window.location.href==("https://www.redstoneonline.jp/event/redslogin")){
+                    }else if(window.location.href==("https://www.redstoneonline.jp/event/roulette")){
+                    }else{
+                        var i=0;
+                        var id = setInterval(function () {
+                            i=i+1;
+                            try{
+                                var elements = document.getElementsByClassName("flex py-1 touch-on");
+                                var pName=elements[0].innerHTML;
+                                chrome.runtime.sendMessage(pName);
+                                clearInterval(id);
+                            }catch(error){
+                            }
+                            if(i>1000){
+                                clearInterval(id);
+					       }
+                        },100);
+                    }
+                }else{
+                    var pName="souei"
+                    chrome.runtime.sendMessage(pName);
+                }
+			}
 		}else{
 			window.location.href = request;
 		}
